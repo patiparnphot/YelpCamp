@@ -8,7 +8,7 @@ var express         = require("express"),
     flash           = require("connect-flash"),
     session         = require("express-session"),
     methodOverride  = require("method-override");
-    // Campground  = require("./models/campground"),
+    Campground  = require("./models/campground"),
     // Comment     = require("./models/comment"),
     // User        = require("./models/user");
 
@@ -19,6 +19,7 @@ var express         = require("express"),
 //     indexRoutes      = require("./routes/index");
     
 //SETUP GENERAL
+
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -48,6 +49,14 @@ app.use(function(req, res, next){
 
 app.get("/", function(req,res){
     res.send("Hello");
+});
+
+//INDEX - show all campgrounds
+app.get("/campgrounds/", function(req, res){
+    // Get all campgrounds from DB
+    Campground.find({}, function(err, allCampgrounds){
+        res.render("campgrounds/index",{campgrounds:allCampgrounds});
+    });
 });
 
 // app.use("/", indexRoutes);
