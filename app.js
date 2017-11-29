@@ -7,15 +7,15 @@ var express         = require("express"),
     LocalStrategy   = require("passport-local"),
     flash           = require("connect-flash"),
     session         = require("express-session"),
-    methodOverride  = require("method-override");
-    Campground  = require("./models/campground"),
+    methodOverride  = require("method-override"),
+    Campground  = require("./models/campground");
     // Comment     = require("./models/comment"),
     // User        = require("./models/user");
 
     
 // //requiring routes
 // var commentRoutes    = require("./routes/comment"),
-//     campgroundRoutes = require("./routes/campground"),
+var campgroundRoutes = require("./routes/campground");
 //     indexRoutes      = require("./routes/index");
     
 //SETUP GENERAL
@@ -51,16 +51,8 @@ app.get("/", function(req,res){
     res.send("Hello");
 });
 
-//INDEX - show all campgrounds
-app.get("/campgrounds/", function(req, res){
-    // Get all campgrounds from DB
-    Campground.find({}, function(err, allCampgrounds){
-        res.render("campgrounds/index",{campgrounds:allCampgrounds});
-    });
-});
-
 // app.use("/", indexRoutes);
-// app.use("/campgrounds", campgroundRoutes);
+app.use("/campgrounds", campgroundRoutes);
 // app.use("/campgrounds/:id/comments", commentRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
