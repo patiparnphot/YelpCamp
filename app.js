@@ -8,15 +8,15 @@ var express         = require("express"),
     flash           = require("connect-flash"),
     session         = require("express-session"),
     methodOverride  = require("method-override"),
-    Campground  = require("./models/campground");
-    // Comment     = require("./models/comment"),
-    // User        = require("./models/user");
+    Campground  = require("./models/campground"),
+    Comment     = require("./models/comment"),
+    User        = require("./models/user");
 
     
-// //requiring routes
-// var commentRoutes    = require("./routes/comment"),
-var campgroundRoutes = require("./routes/campground");
-//     indexRoutes      = require("./routes/index");
+//requiring routes
+var commentRoutes    = require("./routes/comment"),
+    campgroundRoutes = require("./routes/campground"),
+    indexRoutes      = require("./routes/index");
     
 //SETUP GENERAL
 
@@ -36,24 +36,20 @@ app.use(require("express-session")({
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-// passport.use(new LocalStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-app.use(function(req, res, next){
-   res.locals.currentUser = req.user;
-   res.locals.success = req.flash('success');
-   res.locals.error = req.flash('error');
-   next();
-});
+// app.use(function(req, res, next){
+//   res.locals.currentUser = req.user;
+//   res.locals.success = req.flash('success');
+//   res.locals.error = req.flash('error');
+//   next();
+// });
 
-app.get("/", function(req,res){
-    res.send("Hello");
-});
-
-// app.use("/", indexRoutes);
+app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
-// app.use("/campgrounds/:id/comments", commentRoutes);
+app.use("/campgrounds/:id/comments", commentRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("The YelpCamp Server Has Started!");
