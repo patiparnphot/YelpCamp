@@ -1,26 +1,20 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>YelpCamp</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <script src="https://code.jquery.com/jquery-git2.min.js"></script>
-    </head>
-    <body>
-    
-    <div class="container">
+<% include ../partials/header %>
         
         <div class="row">
             <h1 style="text-align: center">EDIT <%= campground.name %></h1>
             <div style="width: 30%; margin: 25px auto;">
                 <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST">
                     <div class="form-group">
-                        <input class="form-control" type="text" name="editData[name]" value="<%= campground.name %>">
+                        <input class="form-control" type="text" name="editData[name]" value="<%= campground.name %>" required>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="text" name="editData[image]" value="<%= campground.image %>">
+                        <input class="form-control" type="text" name="editData[image]" value="<%= campground.image %>" required>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="text" name="editData[description]" value="<%= campground.description %>">
+                        <input class="form-control" type="text" name="editData[description]" value="<%= campground.description %>" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="number" name="editData[cost]" value="<%= campground.cost %>" step="0.01" min="0" required>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-lg btn-primary btn-block">Update!</button>
@@ -30,6 +24,4 @@
             </div>
         </div>
         
-    </div>
-    </body>
-</html>
+<% include ../partials/footer %>

@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>YelpCamp</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <script src="https://code.jquery.com/jquery-git2.min.js"></script>
-    </head>
-    <body>
-    
-    <div class="container">
+<% include ../partials/header %>
     
         <header class="jumbotron">
             <div class="container">
@@ -19,7 +10,7 @@
             </div>
         </header>
         
-        <div class"roll">
+        <div class="row text-center">
             <% campgrounds.forEach(function(campground){ %>
                 <div class="col-md-3 col-sm-6">
                     <div class="thumbnail">
@@ -35,6 +26,4 @@
             <% }); %>
         </div>
     
-    </div>
-    </body>
-</html>
+<% include ../partials/footer %>
