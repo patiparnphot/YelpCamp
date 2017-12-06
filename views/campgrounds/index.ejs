@@ -1,5 +1,7 @@
 <% include ../partials/header %>
-    
+    <% if(currentUser && currentUser.isAdmin) { %>
+        <div class="alert alert-success"><p>WELCOME ADMIN <%= currentUser.firstname %></p></div>
+    <% } %>
         <header class="jumbotron">
             <div class="container">
                 <h1><span class="glyphicon glyphicon-tent"></span> Welcome To YelpCamp!</h1>

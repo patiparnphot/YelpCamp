@@ -1,0 +1,38 @@
+<% include ../partials/header %>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h1><%= user.firstname + " " + user.lastname %></h3>
+            <div class="thumbnail text-center">
+                <img src="<%= user.avatar %>" alt="user profile image">
+                <div class="caption"><a href="mailto:<%= user.email %>"><%= user.email %></a></div>
+            </div>
+            Bacon ipsum dolor amet shankle t-bone jerky, turducken prosciutto cow capicola andouille 
+            beef ribs burgdoggen jowl pork loin leberkas boudin porchetta. Corned beef tail turducken 
+            bresaola jerky strip steak, shoulder brisket pork belly picanha chicken andouille pork loin landjaeger.
+            Tri-tip meatloaf pig rump filet mignon, ham hock short loin kevin flank swine spare ribs pork. Ham hock 
+            capicola meatloaf t-bone ground round bacon short loin pork andouille salami picanha meatball pastrami.
+            Bresaola jowl short ribs pork chop drumstick. Pancetta short loin brisket doner.<br>
+
+            Corned beef biltong strip steak doner boudin turducken cow ham hock ground round shoulder rump jowl.
+            Turkey filet mignon cupim meatloaf bacon tenderloin. Ball tip picanha shank meatball sausage, shoulder
+            tri-tip prosciutto andouille. Tenderloin cow frankfurter pastrami, filet mignon salami ball tip strip
+            steak sausage chuck leberkas buffalo bresaola sirloin pork belly. Ham hock sausage bacon corned beef 
+            strip steak jowl, filet mignon jerky boudin swine shankle pancetta short loin turkey. Leberkas shank ham,
+            andouille frankfurter burgdoggen chuck spare ribs capicola drumstick pork chop landjaeger bresaola cupim boudin.
+            <hr>
+        </div>  
+        <div class="col-md-8">
+            <h2><%= user.username %>'s campgrounds:</h2>
+            <% campgrounds.forEach(function(campground){ %>
+                <div class="thumbnail text-center">
+                    <img src="<%= campground.image %>">
+                    <div class="caption">
+                        <a href="/campgrounds/<%= campground.id %>"><%= campground.name %></a>
+                    </div>
+                <div>
+            <% }); %>
+        </div>
+    </div>
+
+<% include ../partials/footer %>

@@ -7,6 +7,10 @@ var express = require("express"),
 //NEW - show form to create a new comment
 router.get("/new", middleware.isLoggedIn, function(req, res){
     Campground.findById(req.params.id, function(err, campground){
+        if(err){
+            req.flash("error", "DONT MESS WITH MY SITE");
+            res.redirect("back");
+        }
        res.render("comments/new", {campground: campground}) 
     });
 });
@@ -14,7 +18,15 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 //CREATE - add a new comment to db
 router.post("/", middleware.isLoggedIn, function(req, res){
    Campground.findById(req.params.id, function(err, campground){
+       if(err){
+            req.flash("error", "DONT MESS WITH MY SITE");
+            res.redirect("back");
+        }
       Comment.create(req.body.comment, function(err, comment){
+          if(err){
+            req.flash("error", "CANNOT ADD NEW COMMENT");
+            res.redirect("back");
+          }
          comment.author.id = req.user._id;
          comment.author.username = req.user.username;
          comment.save();
@@ -29,6 +41,10 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 //EDIT - show form to edit a comment
 router.get("/:commentId/edit", middleware.checkUserComment, function(req, res){
     Comment.findById(req.params.commentId, function(err, comment){
+        if(err){
+            req.flash("error", "DONT MESS WITH MY SITE");
+            res.redirect("back");
+        }
         res.render("comments/edit", {campground_id: req.params.id, comment: comment}); 
     });
 });
@@ -36,6 +52,10 @@ router.get("/:commentId/edit", middleware.checkUserComment, function(req, res){
 //UPDATE - edit a comment in db
 router.put("/:commentId", middleware.checkUserComment, function(req, res){
     Comment.findByIdAndUpdate(req.params.commentId, req.body.comment, function(err, comment){
+        if(err){
+            req.flash("error", "DONT MESS WITH MY SITE");
+            res.redirect("back");
+        }
         req.flash("success", "Successfully edit your comment")
         res.redirect("/campgrounds/" + req.params.id);
     });
@@ -44,6 +64,10 @@ router.put("/:commentId", middleware.checkUserComment, function(req, res){
 //DESTROY - delete a campground from db
 router.delete("/:commentId", middleware.checkUserComment, function(req, res){
     Comment.findByIdAndRemove(req.params.commentId, function(err){
+        if(err){
+            req.flash("error", "DONT MESS WITH MY SITE");
+            res.redirect("back");
+        }
         req.flash("success", "Successfully remove your comment");
         res.redirect("/campgrounds/" + req.params.id);
     });
