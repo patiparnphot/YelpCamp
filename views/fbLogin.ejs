@@ -1,9 +1,9 @@
 <% include ./partials/header %>
             
             <div class="row">
-                <h1 style="text-align: center">Sign Up</h1>
+                <h1 style="text-align: center">Sign Up AS FB Account</h1>
                 <div style="width: 30%; margin: 25px auto;">
-                    <form action="/register" method="POST" enctype="multipart/form-data">
+                    <form action="/fbRegister" method="POST" >
                         <div class="form-group">
                             <input class="form-control" type="text" name="username" placeholder="username" required>
                         </div>
@@ -11,21 +11,19 @@
                             <input class="form-control" type="password" name="password" placeholder="password" required>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="firstname" placeholder="your firstname" required>
+                            <input class="form-control" type="text" name="firstname" value="<%= user.firstname %>" required>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="lastname" placeholder="your lastname" required>
+                            <input class="form-control" type="text" name="lastname" value="<%= user.lastname %>" required>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="email" name="email" placeholder="example@gmail.com" required>
+                            <input class="form-control" type="email" name="email" value="<%= user.email %>" required>
                         </div>
+                        <img src="<%= user.avatar %>" style="width:50%; margin-left:25%;">
                         <div class="form-group">
-                            <label for="image">Image</label>
-                            <input type="file" id="image" name="image" accept="image/*" required>
+                            <input class="form-control" type="text" name="image" value="<%= user.avatar %>" required>
                         </div>
-                         <div class="form-group">
-                            <input class="form-control" type="password" name="adminCode" placeholder="admincode">
-                        </div>
+                        <input name="publicId" value="<%= user.publicId %>" hidden>
                         <div class="form-group">
                             <button class="btn btn-lg btn-primary btn-block">Sign Up!</button>
                         </div>

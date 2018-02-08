@@ -4,6 +4,9 @@
         <title>YelpCamp</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script src="https://code.jquery.com/jquery-git2.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-default">
@@ -14,8 +17,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <% if(!currentUser){ %>
-                            <li><a href="/login">Login</a></li>
-                            <li><a href="/register">Sign Up</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#myModal">Sign In</a></li>
                         <% } else { %>
                             <li><a href="#">Signed In As <%= currentUser.username %></a></li>
                             <li><a href="/logout">Logout</a></li>
@@ -33,4 +35,130 @@
                 <div class="alert alert-danger"><p><%=error %></p></div>
             <% } %>
         </div>
+        <script>
+            $('#myModal').modal('show');
+        </script>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Login/Registration</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
+                                <!-- Nav tabs -->
+                                <ul class="nav">
+                                    <li class="active"><a href="#Login" data-toggle="tab">Login</a></li>
+                                    <li><a href="#Registration" data-toggle="tab">Registration</a></li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="Login">
+                                        <form role="form" class="form-horizontal" action="/login" method="POST">
+                                            <div class="form-group">
+                                                <label for="username" class="col-sm-2 control-label">
+                                                    Username</label>
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" type="text" id="username" name="username" placeholder="username" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password" class="col-sm-2 control-label">
+                                                    Password</label>
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" type="password" id="password" name="password" placeholder="password" required>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <button type="submit" class="btn btn-primary btn-sm">
+                                                        LogIn</button>
+                                                    <a href="/forgot">Forgot your password?</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane" id="Registration">
+                                        <form role="form" class="form-horizontal" action="/register" method="POST" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label for="username" class="col-sm-2 control-label">
+                                                Username</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="text" id="username" name="username" placeholder="username" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password" class="col-sm-2 control-label">
+                                                Password</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="password" id="password" name="password" placeholder="password" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="firstname" class="col-sm-2 control-label">
+                                                Firstname</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="text" id="firstname" name="firstname" placeholder="firstname" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastname" class="col-sm-2 control-label">
+                                                Lastname</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="text" id="lastname" name="lastname" placeholder="lastname" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email" class="col-sm-2 control-label">
+                                                Email</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="email" id="email" name="email" placeholder="example@gmail.com" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="image" class="col-sm-2 control-label">
+                                                Profile</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="file" id="image" name="image" accept="image/*" required>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                    Save & Continue</button>
+                                                <button type="reset" class="btn btn-default btn-sm">
+                                                    Cancel</button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!--<div id="OR" class="hidden-xs">OR</div>-->
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row text-center">
+                                    <div class="col-md-12">
+                                        <h3>Sign in with</h3>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="btn-group btn-group-justified">
+                                            <a href="/auth/facebook" class="btn btn-primary">Facebook</a> <a href="#" class="btn btn-danger">
+                                                Google</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <div class="container">
+        

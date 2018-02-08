@@ -4,7 +4,9 @@
   "description": "prototype",
   "main": "app.js",
   "dependencies": {
+    "async": "^2.6.0",
     "body-parser": "^1.18.2",
+    "cloudinary": "^1.9.1",
     "connect-flash": "^0.1.1",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
@@ -12,10 +14,15 @@
     "method-override": "^2.3.10",
     "moment": "^2.19.3",
     "mongoose": "^4.13.4",
+    "multer": "^1.3.0",
+    "nodemailer": "^4.4.0",
     "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.4.0",
-    "request": "^2.83.0"
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "xoauth2": "^1.2.0"
   },
   "devDependencies": {},
   "scripts": {
