@@ -51,10 +51,10 @@
                                     <div class="form-group">
                                         <button class="btn btn-success btn-sm">Comment <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
                                     </div>
-                                  </form>
+                                </form>
                             <% } %>
                         </div>
-                      </div>
+                    </div>
                     <hr>
                     <% if (campground.comments.length === 0) { %>
                         <em style="color: grey;">No comments yet.</em>
@@ -71,31 +71,29 @@
                                     <%= comment.author.username %>
                                 </strong>
                                 <span class="pull-right"><%= moment(comment.createdAt).fromNow() %></span>
-                                <div>
-                                    <p><%= comment.text %></p>
-                                    <% if((currentUser && comment.author.id.equals(currentUser._id)) || (currentUser && currentUser.isAdmin)){ %>
-                                        <form style="display: inline" class="pull-right" action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
-                                            <a role="button" data-toggle="collapse" href="#collapseEdit<%= comment._id %>" aria-expanded="false" aria-controls="collapse<%= comment._id %>" class="btn btn-xs btn-info">EDIT</a>
-                                            <button class="btn btn-xs btn-danger">DELETE</button>
-                                        </form>
-                                        <div class="collapse" id="collapseEdit<%= comment._id %>">
-                                            <div class="well" style="border-left: 5px solid #ffbb33; margin-top: 15px;">
-                                                <h4>Edit your comment <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></h4>
-                                                <form action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
-                                                    <div class="form-group">
-                                                        <input class="form-control" type="text" disabled value="<%= currentUser.username %>">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input class="form-control" type="text" name="comment[text]" placeholder="Your comment text..." value="<%= comment.text %>">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <button class="btn btn-warning btn-sm">Edit comment <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                <p><%= comment.text %></p>
+                                <% if((currentUser && comment.author.id.equals(currentUser._id)) || (currentUser && currentUser.isAdmin)){ %>
+                                    <form style="display: inline" class="pull-right" action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                                        <a role="button" data-toggle="collapse" href="#collapseEdit<%= comment._id %>" aria-expanded="false" aria-controls="collapse<%= comment._id %>" class="btn btn-xs btn-info">EDIT</a>
+                                        <button class="btn btn-xs btn-danger">DELETE</button>
+                                    </form>
+                                    <div class="collapse" id="collapseEdit<%= comment._id %>">
+                                        <div class="well" style="border-left: 5px solid #ffbb33; margin-top: 15px;">
+                                            <h4>Edit your comment <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></h4>
+                                            <form action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" disabled value="<%= currentUser.username %>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" name="comment[text]" placeholder="Your comment text..." value="<%= comment.text %>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn btn-warning btn-sm">Edit comment <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+                                                </div>
+                                            </form>
                                         </div>
-                                    <% }; %>
-                                </div>
+                                    </div>
+                                <% }; %>
                             </div>
                         </div>
                     <% }); %>
